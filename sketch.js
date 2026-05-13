@@ -620,7 +620,8 @@ class Obstacle {
     if (this.type === 'small' && assets.cactusSmall) image(assets.cactusSmall, this.x, this.y, this.w, this.h);
     else if (this.type === 'large' && assets.cactusLarge) image(assets.cactusLarge, this.x, this.y, this.w, this.h);
     else if (this.type === 'ptero' && (assets.pteroFrames[0] || assets.pteroFrames[1])) {
-      const wingFrame = isPaused ? 0 : Math.floor(frameCount / 8) % 2;
+      const wingFreeze = isPaused || gameState === 'gameOver';
+      const wingFrame = wingFreeze ? 0 : Math.floor(frameCount / 8) % 2;
       const pteroImg = assets.pteroFrames[wingFrame] || assets.pteroFrames[0] || assets.pteroFrames[1];
       image(pteroImg, this.x, this.y, this.w, this.h);
     }
