@@ -16,7 +16,8 @@ const PLATFORM_EVENT = { minScore: 20, chancePerFrame: 0.005, durationFrames: 18
 const PLATFORM_W = 220;
 const JUMP_COYOTE_FRAMES = 12;
 const HIGH_SCORE_STORAGE_KEY = 'dinoRunHighScore_v1';
-const SFX_VOLUME = 0.48; // 0–1; loaded jump/gameover and any future hit/score use this
+const SFX_VOLUME = 0.48; // 0–1; hit, gameover, score
+const SFX_JUMP_VOLUME = 0.28; // jump only (quieter than other SFX)
 const CLOUD_SPAWN_CHANCE = 0.012;
 const MAX_CLOUDS = 14;
 const TITLE_CLOUD_DRIFT = 0.42;
@@ -365,10 +366,10 @@ function loadFontSafe(path, cb) {
   }
 }
 
-function playSfx(s) {
+function playSfx(s, volume = SFX_VOLUME) {
   if (!s) return;
   try {
-    if (typeof s.setVolume === 'function') s.setVolume(SFX_VOLUME);
+    if (typeof s.setVolume === 'function') s.setVolume(volume);
     s.play();
   } catch (e) {}
 }
@@ -532,7 +533,7 @@ class Player {
     if (!this.canJump()) return;
     this.vy = -JUMP_POWER;
     this.coyoteFrames = 0;
-    playSfx(assets.sfx.jump);
+    playSfx(assets.sfx.jump, SFX_JUMP_VOLUME);
   }
 
   duck(state) {
