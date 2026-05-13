@@ -21,7 +21,7 @@ const SFX_JUMP_VOLUME = 0.20; // jump only (quieter than other SFX)
 const CLOUD_SPAWN_CHANCE = 0.012;
 const MAX_CLOUDS = 14;
 const TITLE_CLOUD_DRIFT = 0.42;
-const BGM_VOL = 0.14;
+const BGM_VOL = 0.12;
 const BGM_FADE_OUT_SEC = 2;
 const BGM_FADE_IN_SEC = 2;
 
